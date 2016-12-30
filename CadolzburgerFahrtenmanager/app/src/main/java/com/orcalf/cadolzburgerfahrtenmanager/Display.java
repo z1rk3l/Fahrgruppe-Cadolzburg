@@ -7,6 +7,7 @@ import android.widget.TextView;
 public class Display extends AppCompatActivity {
     String text;
     TextView name,ort,zeit,kommentar;
+    //Test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
