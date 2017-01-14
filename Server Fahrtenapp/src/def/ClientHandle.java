@@ -24,6 +24,22 @@ public class ClientHandle extends Thread{
 		zumClient.println(fahrten.count());
 		String s=fahrten.sendStrings();
 		zumClient.println(s);
+		
 		System.out.println("Sende "+s);
+		while(true)
+		try {
+			System.out.println("received");
+			String text=vomClient.readLine();
+			Fahrt f=new Fahrt().fahrtAusString(text);
+			if(f!=null)
+			{
+				Fahrten.getInstance().add(f);
+				break;
+			}
+			
+		} catch (IOException e) {
+			System.out.println("Exception beim Empfangen");
+			e.printStackTrace();
+		}
 	}
 }

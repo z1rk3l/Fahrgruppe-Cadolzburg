@@ -1,9 +1,11 @@
 package com.orcalf.cadolzburgerfahrtenmanager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,12 +23,9 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Handler handler=null;
-    TextView debugTest;
-    String content;
     ListView listView ;
     private Button absenden;
     String text;
-    public final static String EXTRA_MESSAGE = "com.orcalf.cadolzburgerfahrtenmanager.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +33,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         try {
-            handler=new Handler();
+            handler=Handler.getInstance();
             text=handler.getContent();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (Exception e) {
+            Context context = getApplicationContext();
+            CharSequence text = "Hello toast!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            try {
+                Thread.sleep(10000);
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         final Object test=this;
@@ -57,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for(int i=0;i<values_pre.length;i++)
          value[i] = values_pre[i].split("[#]");
         String[] values=new String[values_pre.length];
+
         for(int i=0;i<values_pre.length;i++)
         {
             values[i]="Um "+value[i][3]+" nach "+value[i][1];
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
 
         // Assign adapter to ListView

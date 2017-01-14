@@ -13,6 +13,10 @@ public class Fahrten {
 		fahrten.add(new Fahrt("Tim Emmert","Deberndorf","16.00","Kann zwei mitnehmen!"));
 		fahrten.add(new Fahrt("test1","test2","test3","test4"));
 	}
+	public void add(Fahrt f)
+	{
+		fahrten.add(f);
+	}
 	public static Fahrten getInstance() 
 	{
 		if(instance == null) 
