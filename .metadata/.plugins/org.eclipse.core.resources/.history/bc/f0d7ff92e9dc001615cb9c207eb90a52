@@ -26,7 +26,7 @@ public class ClientHandle extends Thread{
 			System.out.println("Versuche zu kommunizieren");
 			String anweisung=vomClient.readLine();
 			
-			if(anweisung.equals("sende"))
+			if(anweisung=="empfange")
 			{
 				System.out.println("Versuche zu empfangen");
 				String text=vomClient.readLine();
@@ -36,7 +36,7 @@ public class ClientHandle extends Thread{
 					Fahrten.getInstance().add(f);
 				}
 			}
-			else if(anweisung.equals("empfange"))
+			else if(anweisung=="sende")
 			{
 				System.out.println("Versuche zu senden");
 				zumClient.println(fahrten.count());
@@ -50,10 +50,6 @@ public class ClientHandle extends Thread{
 		} catch (IOException e1) {
 			System.out.println("Exception");
 			e1.printStackTrace();
-		}
-		catch(NullPointerException e)
-		{
-			break;
 		}
 		
 		}

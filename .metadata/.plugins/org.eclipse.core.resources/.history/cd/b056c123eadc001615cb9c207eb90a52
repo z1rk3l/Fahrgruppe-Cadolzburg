@@ -51,10 +51,6 @@ public class ClientHandle extends Thread{
 			System.out.println("Exception");
 			e1.printStackTrace();
 		}
-		catch(NullPointerException e)
-		{
-			break;
-		}
 		
 		}
 	}

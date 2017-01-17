@@ -35,22 +35,37 @@ public class Handler {
         connection= new Socket();
         connection.connect(new InetSocketAddress("192.168.178.153", 500), 1000);
 
-
         zumServer = new PrintWriter(connection.getOutputStream(), true);
         vomServer = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
         System.out.println("Verbunden!");
 
     }
 
     public String getContent() throws IOException
     {
+        System.out.println("getContent()");
+        sendeAnweisung("empfange");
         String count=vomServer.readLine();
         String message=vomServer.readLine();
         System.out.println(message);
         return message;
     }
+    public void mitfahren(String send)
+    {
+        sendeAnweisung("mitfahren");
+        System.out.println("mitfahren()");
+        zumServer.println(send);
+    }
+    public void sendeAnweisung(String anweisung)
+    {
+        System.out.println("sendeAnweisung()");
+        zumServer.println(anweisung);
+    }
     public void sendeFahrt(Fahrt f)
     {
+        System.out.println("sendeFahrt()");
+        sendeAnweisung("sende");
         zumServer.println(f.getString());
     }
 }

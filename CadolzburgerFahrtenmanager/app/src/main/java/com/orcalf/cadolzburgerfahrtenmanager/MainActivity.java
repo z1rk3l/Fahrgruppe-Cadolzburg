@@ -22,69 +22,29 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
     private Handler handler=null;
-    ListView listView ;
-    private Button absenden;
-    String text;
+    private ListView listView ;
+    private Button absenden,neuladen;
+    private String text=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        try {
-            handler=Handler.getInstance();
-            text=handler.getContent();
-
-
-        } catch (Exception e) {
-            Context context = getApplicationContext();
-            CharSequence text = "Hello toast!";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            try {
-                Thread.sleep(10000);
-            }
-            catch(Exception ex)
-            {
-
-            }
-        }
-
-        final Object test=this;
+        //Elemente initialisieren/nötige Methoden aufrufen
+        neuladen=(Button) findViewById(R.id.laden);
+        neuladen.setOnClickListener(MainActivity.this);
         absenden = (Button) findViewById(R.id.selbst) ;
-
         absenden.setOnClickListener(MainActivity.this);
-
         listView = (ListView) findViewById(R.id.list);
-
-        String[] values_pre = text.split("[;]");
-        String[][] value=new String[values_pre.length][4];
-        for(int i=0;i<values_pre.length;i++)
-         value[i] = values_pre[i].split("[#]");
-        String[] values=new String[values_pre.length];
-
-        for(int i=0;i<values_pre.length;i++)
-        {
-            values[i]="Um "+value[i][3]+" nach "+value[i][1];
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        updateListview();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { //On click Listener setzen
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
@@ -95,19 +55,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startNew(text.split("[;]")[position]);
             }
         });
-
-
     }
-    public void startNew(String s) {
+
+    public void holeText()
+    {
+        try {
+            handler=Handler.getInstance();
+            text=handler.getContent();
+
+
+        } catch (Exception e) {
+            try {
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+    }
+
+    public String[] parseText()
+    {
+        String[] values_pre = text.split("[;]");
+        String[][] value=new String[values_pre.length][4];
+        for(int i=0;i<values_pre.length;i++)
+            value[i] = values_pre[i].split("[#]");
+        String[] values=new String[values_pre.length];
+
+        for(int i=0;i<values_pre.length;i++)
+        {
+            values[i]="Um "+value[i][3]+" nach "+value[i][1];
+        }
+        return values;
+    }
+    public void startNew(String s) {    //Startet Mitfahraktivität, übergibt Strings
         Intent intent = new Intent(this, Display.class);
         intent.putExtra("key_1",s);
         startActivity(intent);
     }
+    public void updateListview()
+    {
+        holeText();
+        String[] values= parseText();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        listView.setAdapter(adapter);
+    }
     @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(this, SelbstFahren.class);
-        intent.putExtra("key_1","");
-        startActivity(intent);
+    public void onClick(View view) {    //Startet durch Druck auf Knopf Selbstfahr Aktivität
+        if(view.toString().contains("laden"))
+        {
+            updateListview();
+        }
+        else
+        {
+            Intent intent = new Intent(this, SelbstFahren.class);
+            intent.putExtra("key_1","");
+            startActivity(intent);
+        }
+
     }
 
 

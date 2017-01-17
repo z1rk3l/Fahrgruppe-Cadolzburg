@@ -2,11 +2,16 @@ package com.orcalf.cadolzburgerfahrtenmanager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class Display extends AppCompatActivity {
-    String text;
+import java.io.IOException;
+
+public class Display extends AppCompatActivity implements View.OnClickListener {
+    String text,send;
     TextView name,ort,zeit,kommentar;
+    Button mitfahren;
     //Test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +35,19 @@ public class Display extends AppCompatActivity {
         ort.append(tokens[1]);
         zeit.append(tokens[3]);
         kommentar.append(tokens[0]);
+
+        mitfahren=(Button) findViewById(R.id.mitfahren);
+        mitfahren.setOnClickListener(Display.this);
+
+        send=tokens[1];
+    }
+    @Override
+    public void onClick(View v)
+    {
+        try {
+            Handler.getInstance().mitfahren(send);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

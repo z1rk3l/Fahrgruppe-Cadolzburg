@@ -21,7 +21,19 @@
         android:layout_height="wrap_content"
         android:text="Selbst Fahren!"
         android:id="@+id/selbst"
+        android:layout_marginBottom="28dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neu Laden"
+        android:id="@+id/laden"
+        android:layout_alignBottom="@+id/selbst"
+        android:layout_alignRight="@+id/list"
+        android:layout_alignEnd="@+id/list" />
 </RelativeLayout>
