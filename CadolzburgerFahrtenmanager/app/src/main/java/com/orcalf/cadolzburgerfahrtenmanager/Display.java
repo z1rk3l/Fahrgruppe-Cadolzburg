@@ -39,7 +39,7 @@ public class Display extends AppCompatActivity implements View.OnClickListener {
         mitfahren=(Button) findViewById(R.id.mitfahren);
         mitfahren.setOnClickListener(Display.this);
 
-        send=tokens[1];
+        send=tokens[2];
     }
     @Override
     public void onClick(View v)

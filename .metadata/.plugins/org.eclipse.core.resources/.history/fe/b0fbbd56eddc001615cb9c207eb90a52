@@ -47,7 +47,6 @@ public class ClientHandle extends Thread{
 			{
 				System.out.println("Versuche zu empfangen(mitfahren)");
 				String text=vomClient.readLine();
-				System.out.println(text);
 				fahrten.mitfahrer(text);
 				
 			}

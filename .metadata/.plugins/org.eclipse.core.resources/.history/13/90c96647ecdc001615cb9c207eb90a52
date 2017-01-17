@@ -43,14 +43,6 @@ public class ClientHandle extends Thread{
 				String s=fahrten.sendStrings();
 				zumClient.println(s);
 			}
-			else if(anweisung.equals("mitfahren"))
-			{
-				System.out.println("Versuche zu empfangen(mitfahren)");
-				String text=vomClient.readLine();
-				System.out.println(text);
-				fahrten.mitfahrer(text);
-				
-			}
 			else
 			{
 				System.out.println(anweisung);

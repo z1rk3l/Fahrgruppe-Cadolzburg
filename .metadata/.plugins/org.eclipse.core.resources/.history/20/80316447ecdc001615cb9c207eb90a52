@@ -13,11 +13,11 @@ public class Fahrten {
 		fahrten.add(new Fahrt("Tim Emmert","Deberndorf","16.00","Kann zwei mitnehmen!"));
 		fahrten.add(new Fahrt("test1","test2","test3","test4"));
 	}
-	public synchronized void add(Fahrt f)
+	public void add(Fahrt f)
 	{
 		fahrten.add(f);
 	}
-	public synchronized static Fahrten getInstance() 
+	public static Fahrten getInstance() 
 	{
 		if(instance == null) 
 		{
@@ -25,11 +25,11 @@ public class Fahrten {
 	    }
 	    return instance;
 	}
-	public synchronized String count()
+	public String count()
 	{
 		return String.valueOf(fahrten.size());
 	}
-	public synchronized String sendStrings()
+	public String sendStrings()
 	{
 		String total="";
 		for(int i=0;i<fahrten.size();i++)
@@ -37,17 +37,6 @@ public class Fahrten {
 			total+=fahrten.get(i).getString()+";";
 		}
 		return total;
-	}
-	public synchronized void mitfahrer(String s)
-	{
-		for(int i=0;i<fahrten.size();i++)
-		{
-			System.out.println("Vergleiche "+s+" mit "+fahrten.get(i).fahrer);
-			if(fahrten.get(i).zeit.equals(s))
-			{
-				fahrten.get(i).fahrer+="Ein weiterer Mitfahrer";
-			}
-		}
 	}
 	
 }

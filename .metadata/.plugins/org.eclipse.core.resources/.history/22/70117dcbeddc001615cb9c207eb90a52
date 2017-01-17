@@ -43,9 +43,9 @@ public class Fahrten {
 		for(int i=0;i<fahrten.size();i++)
 		{
 			System.out.println("Vergleiche "+s+" mit "+fahrten.get(i).fahrer);
-			if(fahrten.get(i).zeit.equals(s))
+			if(fahrten.get(i).fahrer.equals(s))
 			{
-				fahrten.get(i).fahrer+="Ein weiterer Mitfahrer";
+				fahrten.get(i).kommentar+="Ein weiterer Mitfahrer";
 			}
 		}
 	}

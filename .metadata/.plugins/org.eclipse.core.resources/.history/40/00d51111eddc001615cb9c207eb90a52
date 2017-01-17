@@ -3,7 +3,7 @@ package def;
 
 public class Fahrt {
 	
-	public String zeit,ort,plaetze,ziel,kommentar,fahrer;
+	private String zeit,ort,plaetze,ziel,kommentar,fahrer;
 	
 	public Fahrt()
 	{
