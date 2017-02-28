@@ -22,6 +22,7 @@ public class ClientHandle extends Thread{
 	public void run()
 	{
 		while(true){
+			System.out.println("dsdsd");
 		try {
 			System.out.println("Versuche zu kommunizieren");
 			String anweisung=vomClient.readLine();

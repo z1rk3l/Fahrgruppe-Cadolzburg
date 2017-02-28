@@ -49,6 +49,7 @@ public class ClientHandle extends Thread{
 				String text=vomClient.readLine();
 				System.out.println(text);
 				fahrten.mitfahrer(text);
+				
 			}
 			else
 			{

@@ -10,7 +10,6 @@ INDEX VERSION 1.127+C:\Users\Orcalf\Documents\Github\Fahrgruppe-Cadolzburg\.meta
 3407430047.index
 2800558102.index
 351221734.index
-3639411095.index
 2637943071.index
 985286902.index
 2019903893.index

@@ -1,10 +1,9 @@
 package def;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.UnsupportedEncodingException;
 
 
 public class CreateLogs {
@@ -20,12 +19,19 @@ public class CreateLogs {
 		} catch (IOException e) {
 		}
 	}
-	public synchronized void log(String s)
+	public void log(String s)
 	{
 		try {
-		    Files.write(Paths.get("ServerLogs.txt"), (s+"\n").getBytes(), StandardOpenOption.APPEND);
-		}catch (IOException e) {
+			writer = new PrintWriter("ServerLogs.txt", "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	    writer.println(s);
+	    writer.close();
 	}
 	public synchronized static CreateLogs getInstance() 
 	{

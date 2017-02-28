@@ -76,17 +76,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public String[] parseText()
     {
-        String[] values_pre = text.split("[;]");
-        String[][] value=new String[values_pre.length][7];
-        for(int i=0;i<values_pre.length;i++)
-            value[i] = values_pre[i].split("[#]");
-        String[] values=new String[values_pre.length];
+        if(text.length()!=0) {
+            String[] values_pre = text.split("[;]");
+            String[][] value = new String[values_pre.length][7];
+            for (int i = 0; i < values_pre.length; i++)
+                value[i] = values_pre[i].split("[#]");
+            String[] values = new String[values_pre.length];
 
-        for(int i=0;i<values_pre.length;i++)
-        {
-            values[i]="Um "+value[i][3]+" nach "+value[i][1];
+            for (int i = 0; i < values_pre.length; i++) {
+                values[i] = "Um " + value[i][4] + ":" + value[i][5] + " nach " + value[i][2];
+            }
+            return values;
         }
-        return values;
+        else
+            return null;
     }
     public void startNew(String s) {    //Startet Mitfahraktivität, übergibt Strings
         Intent intent = new Intent(this, Display.class);
@@ -97,9 +100,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void updateListview()
     {
         holeText();
+
         String[] values= parseText();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        listView.setAdapter(adapter);
+        if(values!=null) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+            listView.setAdapter(adapter);
+        }
     }
     @Override
     public void onClick(View view) {    //Startet durch Druck auf Knopf Selbstfahr Aktivität

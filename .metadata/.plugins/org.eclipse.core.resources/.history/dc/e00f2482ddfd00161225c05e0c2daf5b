@@ -17,10 +17,6 @@ public class Fahrten {
 	{
 		fahrten.add(f);
 	}
-	public LinkedList<Fahrt> getList()
-	{
-		return fahrten;
-	}
 	public synchronized static Fahrten getInstance() 
 	{
 		if(instance == null) 

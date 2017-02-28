@@ -19,6 +19,8 @@ public class SelbstFahren3 extends AppCompatActivity  {
 
         senden= (Button) findViewById(R.id.weiter);
         num = (NumberPicker) findViewById(R.id.numberPicker);
+        num.setMinValue(1);
+        num.setMaxValue(30);
         senden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println("Working!!");

@@ -1,7 +1,9 @@
 package def;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -23,8 +25,9 @@ public class CreateLogs {
 	public synchronized void log(String s)
 	{
 		try {
-		    Files.write(Paths.get("ServerLogs.txt"), (s+"\n").getBytes(), StandardOpenOption.APPEND);
+		    Files.write(Paths.get("ServerLogs.txt"), s.getBytes(), StandardOpenOption.APPEND);
 		}catch (IOException e) {
+		    //exception handling left as an exercise for the reader
 		}
 	}
 	public synchronized static CreateLogs getInstance() 
