@@ -1,0 +1,69 @@
+package def;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class ClientHandle extends Thread{
+	
+	private PrintWriter zumClient;
+    private BufferedReader vomClient;
+    private Fahrten fahrten;
+    
+	public ClientHandle(Socket connection) throws IOException
+	{
+		zumClient = new PrintWriter(connection.getOutputStream(), true);
+        vomClient = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        fahrten=Fahrten.getInstance();
+	}
+	
+	public void run()
+	{
+		while(true){
+		try {
+			System.out.println("Versuche zu kommunizieren");
+			String anweisung=vomClient.readLine();
+			
+			if(anweisung.equals("sende"))
+			{
+				System.out.println("Versuche zu empfangen");
+				String text=vomClient.readLine();
+				Fahrt f=new Fahrt().fahrtAusString(text);
+				if(f!=null)
+				{
+					Fahrten.getInstance().add(f);
+				}
+			}
+			else if(anweisung.equals("empfange"))
+			{
+				System.out.println("Versuche zu senden");
+				zumClient.println(fahrten.count());
+				String s=fahrten.sendStrings();
+				zumClient.println(s);
+			}
+			else if(anweisung.equals("mitfahren"))
+			{
+				System.out.println("Versuche zu empfangen(mitfahren)");
+				String text=vomClient.readLine();
+				System.out.println(text);
+				fahrten.mitfahrer(text);
+				
+			}
+			else
+			{
+				System.out.println(anweisung);
+			}
+		} catch (IOException e1) {
+			System.out.println("Exception");
+			e1.printStackTrace();
+		}
+		catch(NullPointerException e)
+		{
+			break;
+		}
+		
+		}
+	}
+}

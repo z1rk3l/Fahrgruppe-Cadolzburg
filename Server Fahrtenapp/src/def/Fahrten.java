@@ -10,8 +10,8 @@ public class Fahrten {
 	protected Fahrten() 
 	{
 		fahrten=new LinkedList<Fahrt>();
-		fahrten.add(new Fahrt("Tim Emmert","Deberndorf","16.00","Kann zwei mitnehmen!"));
-		fahrten.add(new Fahrt("test1","test2","test3","test4"));
+		fahrten.add(new Fahrt("Tim Emmert","Deberndorf","Cadolzburg","Kein kommentar","16","2","2"));
+		fahrten.add(new Fahrt("Tim Emmert","Cadolzburg","Deberndorf","Kein kommentar","7","12","2"));
 	}
 	public synchronized void add(Fahrt f)
 	{
@@ -42,10 +42,10 @@ public class Fahrten {
 	{
 		for(int i=0;i<fahrten.size();i++)
 		{
-			System.out.println("Vergleiche "+s+" mit "+fahrten.get(i).fahrer);
-			if(fahrten.get(i).zeit.equals(s))
+			System.out.println("Vergleiche "+s+" mit "+fahrten.get(i).toString());
+			if((fahrten.get(i).name+fahrten.get(i).abfahrt+fahrten.get(i).ankunft).equals(s))
 			{
-				fahrten.get(i).fahrer+="Ein weiterer Mitfahrer";
+				fahrten.get(i).plaetze=String.valueOf(Integer.parseInt(fahrten.get(i).plaetze)-1);
 			}
 		}
 	}

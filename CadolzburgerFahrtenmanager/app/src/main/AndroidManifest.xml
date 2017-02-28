@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Display" />
-        <activity android:name=".SelbstFahren"></activity>
+        <activity android:name=".SelbstFahren" />
+        <activity android:name=".SelbstFahren2" />
+        <activity android:name=".SelbstFahren3"></activity>
     </application>
 
 </manifest>

@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         absenden.setOnClickListener(MainActivity.this);
         listView = (ListView) findViewById(R.id.list);
         updateListview();
+        System.out.println("Debug");
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { //On click Listener setzen
 
             @Override
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String[] parseText()
     {
         String[] values_pre = text.split("[;]");
-        String[][] value=new String[values_pre.length][4];
+        String[][] value=new String[values_pre.length][7];
         for(int i=0;i<values_pre.length;i++)
             value[i] = values_pre[i].split("[#]");
         String[] values=new String[values_pre.length];
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void startNew(String s) {    //Startet Mitfahraktivität, übergibt Strings
         Intent intent = new Intent(this, Display.class);
         intent.putExtra("key_1",s);
+
         startActivity(intent);
     }
     public void updateListview()
@@ -113,6 +115,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
 }

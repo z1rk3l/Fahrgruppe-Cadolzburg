@@ -1,46 +1,36 @@
 package com.orcalf.cadolzburgerfahrtenmanager;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
-
 public class SelbstFahren extends AppCompatActivity {
-    EditText name,ort,zeit,kommentar;
+    EditText name,abfahrt,ankunft,kommentar;
     Button senden;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selbst_fahren);
-        name = (EditText) findViewById(R.id.nametext);
-        ort = (EditText) findViewById(R.id.orttext);
-        zeit = (EditText) findViewById(R.id.zeittext);
-        name = (EditText) findViewById(R.id.nametext);
-        kommentar = (EditText) findViewById(R.id.kommentartext);
-        senden= (Button) findViewById(R.id.absenden);
+        name = (EditText) findViewById(R.id.nameInput);
+        abfahrt = (EditText) findViewById(R.id.abfahrtInput);
+        ankunft = (EditText) findViewById(R.id.ankunftInput);
+        kommentar = (EditText) findViewById(R.id.kommentarInput);
+        senden= (Button) findViewById(R.id.weiter);
 
         senden.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                System.out.println("Working!!");
-                try {
-                    Handler.getInstance().sendeFahrt(getFahrt());
-                }
-                catch(IOException e)
-                {
-                    System.out.println("Send Problem");
-                }
+                Intent intent = new Intent(v.getContext(), SelbstFahren2.class);
+                intent.putExtra("key_1",getText());
+                System.out.println(getText());
+                startActivity(intent);
             }
         });
-
-
-
     }
-
-    public Fahrt getFahrt()
+    public String getText()
     {
-        return new Fahrt(zeit.getText().toString(),ort.getText().toString(),kommentar.getText().toString(),name.getText().toString());
+        return name.getText().toString()+"#"+abfahrt.getText().toString()+"#"+ankunft.getText().toString()+"#"+kommentar.getText().toString();
     }
 }
